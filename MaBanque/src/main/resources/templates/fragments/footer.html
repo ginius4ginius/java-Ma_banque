@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Footer</title>
+</head>
+<body>
+	<footer class="footer" th:fragment="footer">
+		<div th:align="center" class="navbar-fixed-bottom">
+			<p></p>
+			<span th:text="${#temporals.format(#temporals.createNow(), 'yyyy')}"></span>
+			<span>@Copyright - L'adresse de ma banque</span>
+		</div>
+	</footer>
+</body>
+</html>

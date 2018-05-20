@@ -34,7 +34,8 @@ public class BanqueService implements IBanqueService {
 	@Override
 	public void verser(String codeCompte, double montant) {
 		Compte cp = consulterCompte(codeCompte);
-		Versement v = new Versement(new Date(), montant, cp);
+		// Versement v = new Versement(new Date(), montant, cp);
+		Versement v = creerVersement(new Date(), montant, cp);
 		operationRepository.save(v);
 		cp.setSolde(cp.getSolde() + montant);
 		compteRepository.save(cp);
@@ -50,7 +51,8 @@ public class BanqueService implements IBanqueService {
 		if (cp.getSolde() + faciliteCaisse < montant)
 			throw new RuntimeException("solde insuffisant");
 
-		Retrait r = new Retrait(new Date(), montant, cp);
+		// Retrait r = new Retrait(new Date(), montant, cp);
+		Retrait r = creerRetrait(new Date(), montant, cp);
 		operationRepository.save(r);
 		cp.setSolde(cp.getSolde() + montant);
 		compteRepository.save(cp);
@@ -66,8 +68,34 @@ public class BanqueService implements IBanqueService {
 
 	@Override
 	public Page<Operation> listOperations(String codeCompte, int page, int size) {
-		
+
 		return operationRepository.listOperations(codeCompte, new PageRequest(page, size));
 	}
+
+	/////////////////////////////////////////
+	/**
+	 * retourne une isntance d'un Versement pour faciliter les TU
+	 * 
+	 * @param date
+	 * @param montant
+	 * @param cp
+	 * @return
+	 */
+	protected Versement creerVersement(Date date, double montant, Compte cp) {
+		return new Versement(date, montant, cp);
+	}
+
+	/**
+	 * retourne une isntance d'un Retrait pour faciliter les TU
+	 * 
+	 * @param date
+	 * @param montant
+	 * @param cp
+	 * @return
+	 */
+	protected Retrait creerRetrait(Date date, double montant, Compte cp) {
+		return new Retrait(date, montant, cp);
+	}
+	/////////////////////////////////////////
 
 }
