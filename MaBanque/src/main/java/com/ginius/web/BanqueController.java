@@ -16,12 +16,23 @@ public class BanqueController {
 	
 	@Autowired
 	private IBanqueService banqueService;
-
+	
+	/**
+	 * retourne a la page de la consultation d'un compte sans paramètres
+	 * @return
+	 */
 	@RequestMapping("/operations")
 	public String index() {
 		return "comptes";
 	}
 	
+	/**
+	 * méthode qui permet d'afficher les données d'un compte depuis la page comptes
+	 * @param model
+	 * @param codeCompte
+	 * @param p
+	 * @return
+	 */
 	@RequestMapping("/consulterCompte")
 	public String consulter(Model model, String codeCompte, @RequestParam(name = "page", defaultValue = "0") int p) {
 		model.addAttribute("codeCompte",codeCompte);

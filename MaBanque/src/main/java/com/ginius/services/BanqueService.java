@@ -24,7 +24,10 @@ public class BanqueService implements IBanqueService {
 	private CompteRepository compteRepository;
 	@Autowired
 	private OperationRepository operationRepository;
-
+	
+	/**
+	 * méthode qui permet de retourner un compte
+	 */
 	@Override
 	public Compte consulterCompte(String codeCompte) {
 		Compte cp = compteRepository.findById(codeCompte).orElse(null); // get retourne le compte ou une exception
@@ -33,6 +36,9 @@ public class BanqueService implements IBanqueService {
 		return cp;
 	}
 
+	/**
+	 * méthode qui permet de verser de l'argent dans un compte
+	 */
 	@Override
 	public void verser(String codeCompte, double montant) {
 		Compte cp = consulterCompte(codeCompte);
@@ -43,7 +49,10 @@ public class BanqueService implements IBanqueService {
 		compteRepository.save(cp);
 
 	}
-
+	
+	/**
+	 * méthode qui permet de retirer de l'argent
+	 */
 	@Override
 	public void retirer(String codeCompte, double montant) {
 		Compte cp = consulterCompte(codeCompte);
@@ -60,14 +69,19 @@ public class BanqueService implements IBanqueService {
 		compteRepository.save(cp);
 
 	}
-
+	
+	/**
+	 * méthode qui permet de trarnsferer un montant d'un compte à un autre
+	 */
 	@Override
 	public void virement(String codeCompte1, String codeCompte2, double montant) {
 		verser(codeCompte1, montant);
 		retirer(codeCompte2, montant);
 
-	}
-
+		}
+	/**
+	 * méthode qui retourne une pafe d'opérations
+	 */
 	@Override
 	public Page<Operation> listOperations(String codeCompte, int page, int size) {
 
