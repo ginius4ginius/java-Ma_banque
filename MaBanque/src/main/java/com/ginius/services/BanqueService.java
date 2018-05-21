@@ -27,7 +27,9 @@ public class BanqueService implements IBanqueService {
 
 	@Override
 	public Compte consulterCompte(String codeCompte) {
-		Compte cp = compteRepository.findById(codeCompte).get(); // get retourne le compte ou une exception
+		Compte cp = compteRepository.findById(codeCompte).orElse(null); // get retourne le compte ou une exception
+		if(cp==null) throw new RuntimeException("Compte introuvable");
+		
 		return cp;
 	}
 

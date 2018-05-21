@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 discriminatorType=DiscriminatorType.STRING,length=1)
 public abstract class Operation implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private Long numero;

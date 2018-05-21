@@ -22,6 +22,8 @@ discriminatorType = DiscriminatorType.STRING,
 length = 2) // name="dType" DiscriminatorType.VARCHAR lenght=155 par defaut
 public abstract class Compte implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	private String codeCompte;
 	private Date dateCreation;
